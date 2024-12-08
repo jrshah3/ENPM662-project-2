@@ -1,6 +1,6 @@
 # ROS2 Quadruped Robot Project
 
-This repository contains the code for a quadruped robot in ROS2. It provides a simulation environment using Gazebo and visualization in RViz, along with a controller node for robot operation.
+This repository contains the code for a quadruped robot(spotMicro) in ROS2. It provides a simulation environment using Gazebo and visualization in RViz, along with a controller node for robot operation.
 
 ## Prerequisites
 
@@ -81,6 +81,9 @@ rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
+## Spotmicro Repository
+
+The models used can be here: https://www.thingiverse.com/thing:3445283
 
 
 
