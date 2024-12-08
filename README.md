@@ -83,7 +83,7 @@ rosdep install --from-paths src --ignore-src -r -y
 
 ## Spotmicro Repository
 
-The models used can be here: https://www.thingiverse.com/thing:3445283
+The models used can be found here: https://www.thingiverse.com/thing:3445283
 
 
 
