@@ -11,6 +11,7 @@ Before proceeding, make sure you have the following installed:
 - **git** version control system
 - **Gazebo** (for robot simulation)
 - **rviz** (for visualization of robot data)
+- **pybullet** (pip install pybullet for pyvullet visualisation)
 
 ## Installation Instructions
 
@@ -73,7 +74,11 @@ To visualize the robot's data in RViz, run the following command in a new termin
 ```bash
 ros2 launch quadruped_robot display.launch.py
 ```
-
+### 10.Visualize robot in Pybullet
+To visualize the robot in Pybullet, run the following file in python
+```bash
+Pybullet.ipynb
+```
 ## Troubleshooting
 If you encounter errors about missing dependencies, you can install them using rosdep:
 ```bash
