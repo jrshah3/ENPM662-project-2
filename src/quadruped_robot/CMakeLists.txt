@@ -7,10 +7,34 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(robot_state_publisher REQUIRED)
+find_package(xacro REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
 find_package(ros2_control REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+install(DIRECTORY
+urdf
+meshes
+config
+launch
+worlds
+DESTINATION share/${PROJECT_NAME}/
+)
+
+install(
+    DIRECTORY include/quadruped_robot
+    DESTINATION include
+    )
+
+install(
+    PROGRAMS
+    launch/robot_description_publisher.py
+    DESTINATION lib/${PROJECT_NAME}
+    )
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -23,29 +47,5 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-install(DIRECTORY
-urdf
-meshes
-launch
-worlds
-config
-DESTINATION share/${PROJECT_NAME}/
-)
-
-install(
-    DIRECTORY include/quadruped_robot
-    DESTINATION include
-    )
-install(
-    PROGRAMS
-    launch/robot_description_publisher.py
-    DESTINATION lib/${PROJECT_NAME}
-      )
-
-find_package(robot_state_publisher REQUIRED)
-find_package(xacro REQUIRED)
-find_package(tf2 REQUIRED)
-find_package(tf2_ros REQUIRED)
 
 ament_package()

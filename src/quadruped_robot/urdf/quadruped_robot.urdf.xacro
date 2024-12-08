@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
-<robot name="quadruped_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot
+  name="quadruped_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <link name="dummy_link"></link> # Add this after base link <joint name="dummy_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="dummy_link" />
+    <child link="body_link" />
+  </joint>
+
   <link
     name="body_link">
     <inertial>
@@ -7,14 +15,14 @@
         xyz="-0.0104808628759405 0.00224834175396924 -0.0052263545122232"
         rpy="0 0 0" />
       <mass
-        value="0.377252605852233" />
+        value="2.8" />
       <inertia
-        ixx="0.000418954363866351"
-        ixy="7.511988833675E-07"
-        ixz="4.09865880530585E-06"
-        iyy="0.000433125892291076"
-        iyz="1.41818186723719E-08"
-        izz="0.000626600145088028" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -47,14 +55,14 @@
         xyz="0.0163093960247798 -0.00505196516998213 -0.0274849143348015"
         rpy="0 0 0" />
       <mass
-        value="0.0385204737997983" />
+        value="0.15" />
       <inertia
-        ixx="8.71211945498261E-06"
-        ixy="4.10847903075371E-08"
-        ixz="-1.78152149761969E-10"
-        iyy="5.13274302177548E-06"
-        iyz="2.46917233525575E-07"
-        izz="7.80614050595697E-06" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -95,10 +103,10 @@
     <limit
       lower="-1.04"
       upper="1.04"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="fre_link">
@@ -107,14 +115,14 @@
         xyz="-0.0348617587747592 -0.0401535760436038 0.0318877501407731"
         rpy="0 0 0" />
       <mass
-        value="0.0887724177691983" />
+        value="0.15" />
       <inertia
-        ixx="5.33826954697177E-05"
-        ixy="-4.01657420177436E-05"
-        ixz="2.23436712556012E-07"
-        iyy="5.54056136320405E-05"
-        iyz="1.34175995588459E-06"
-        izz="9.09432485780886E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -151,14 +159,14 @@
     <child
       link="fre_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="frw_link">
@@ -167,14 +175,14 @@
         xyz="0.0332213053367797 -0.0366951699334233 0.0245753331663336"
         rpy="0 0 0" />
       <mass
-        value="0.0364534542471395" />
+        value="0.15" />
       <inertia
-        ixx="3.24424063682796E-05"
-        ixy="2.86763548564017E-05"
-        ixz="2.62022167693562E-06"
-        iyy="3.69606897466966E-05"
-        iyz="-2.37232854652557E-06"
-        izz="6.2793297163366E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -198,6 +206,14 @@
         <mesh
           filename="package://quadruped_robot/meshes/frw_link.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
   </link>
   <joint
@@ -211,14 +227,14 @@
     <child
       link="frw_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="rrs_link">
@@ -227,14 +243,14 @@
         xyz="-0.0163095359847977 -0.00505178186569167 -0.0274848378346865"
         rpy="0 0 0" />
       <mass
-        value="0.0385206604865966" />
+        value="0.15" />
       <inertia
-        ixx="8.71226998638339E-06"
-        ixy="-4.115482434391E-08"
-        ixz="1.23274505723502E-10"
-        iyy="5.13285337559971E-06"
-        iyz="2.46844401583443E-07"
-        izz="7.80628697106784E-06" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -271,14 +287,14 @@
     <child
       link="rrs_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.04"
       upper="1.04"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="rre_link">
@@ -287,14 +303,14 @@
         xyz="-0.0353949234320192 -0.0396843949308324 0.0318877499657951"
         rpy="0 0 0" />
       <mass
-        value="0.0887724191485841" />
+        value="0.15" />
       <inertia
-        ixx="5.23102779505384E-05"
-        ixy="-4.01243985782808E-05"
-        ixz="2.41336508654976E-07"
-        iyy="5.64780329923361E-05"
-        iyz="1.33865580603777E-06"
-        izz="9.09432493810381E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -331,14 +347,14 @@
     <child
       link="rre_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="rrw_link">
@@ -347,14 +363,14 @@
         xyz="0.0327282618505259 -0.0371355920751884 0.024575333341552"
         rpy="0 0 0" />
       <mass
-        value="0.0364534574348937" />
+        value="0.15" />
       <inertia
-        ixx="3.3209124018188E-05"
-        ixy="2.87264638709719E-05"
-        ixz="2.58830403962932E-06"
-        iyy="3.61939726921607E-05"
-        iyz="-2.40711154137606E-06"
-        izz="6.27932975779985E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -378,6 +394,14 @@
         <mesh
           filename="package://quadruped_robot/meshes/rrw_link.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
   </link>
   <joint
@@ -391,14 +415,14 @@
     <child
       link="rrw_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="fls_link">
@@ -407,14 +431,14 @@
         xyz="-0.0163097792199962 -0.00505189850993423 -0.0274848378346823"
         rpy="0 0 0" />
       <mass
-        value="0.0385206604865966" />
+        value="0.15" />
       <inertia
-        ixx="8.71226998638337E-06"
-        ixy="-4.1154824343927E-08"
-        ixz="1.23274505726347E-10"
-        iyy="5.1328533755997E-06"
-        iyz="2.46844401583442E-07"
-        izz="7.80628697106783E-06" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -455,10 +479,10 @@
     <limit
       lower="-1.04"
       upper="1.04"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="fle_link">
@@ -467,14 +491,14 @@
         xyz="0.0350678452252907 -0.0400605094902882 0.0318602163794606"
         rpy="0 0 0" />
       <mass
-        value="0.0888795750621334" />
+        value="0.15" />
       <inertia
-        ixx="5.33220086319603E-05"
-        ixy="4.03152567305858E-05"
-        ixz="-1.56293280951274E-07"
-        iyy="5.5909435650468E-05"
-        iyz="1.23774532447155E-06"
-        izz="9.12913759529023E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -511,14 +535,14 @@
     <child
       link="fle_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="flw_link">
@@ -527,14 +551,14 @@
         xyz="0.0334248441375446 0.0365098737154967 0.0245758218958261"
         rpy="0 0 0" />
       <mass
-        value="0.0364534126206596" />
+        value="0.15" />
       <inertia
-        ixx="3.21236278915475E-05"
-        ixy="-2.86494262814616E-05"
-        ixz="2.63338364661735E-06"
-        iyy="3.72793853040095E-05"
-        iyz="2.35772540129963E-06"
-        izz="6.27932167217244E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -558,6 +582,14 @@
         <mesh
           filename="package://quadruped_robot/meshes/flw_link.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
   </link>
   <joint
@@ -571,14 +603,14 @@
     <child
       link="flw_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="rls_link">
@@ -587,14 +619,14 @@
         xyz="0.0163096392599824 -0.00505187347186335 -0.0274849143348058"
         rpy="0 0 0" />
       <mass
-        value="0.0385204737997983" />
+        value="0.15" />
       <inertia
-        ixx="8.71211945498261E-06"
-        ixy="4.10847903075421E-08"
-        ixz="-1.78152149763043E-10"
-        iyy="5.13274302177549E-06"
-        iyz="2.46917233525574E-07"
-        izz="7.80614050595698E-06" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -631,14 +663,14 @@
     <child
       link="rls_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.04"
       upper="1.04"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="rle_link">
@@ -647,14 +679,14 @@
         xyz="0.0356265571944218 -0.0395644610070837 0.0318602162662666"
         rpy="0 0 0" />
       <mass
-        value="0.0888795712596426" />
+        value="0.15" />
       <inertia
-        ixx="5.21911459681106E-05"
-        ixy="4.02630729661195E-05"
-        ixz="-1.73647215854727E-07"
-        iyy="5.70402962740427E-05"
-        iyz="1.23542947436058E-06"
-        izz="9.12913750930588E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -691,14 +723,14 @@
     <child
       link="rle_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="rlw_link">
@@ -707,14 +739,14 @@
         xyz="-0.0329092151249457 -0.0369753287019312 0.0245758218509723"
         rpy="0 0 0" />
       <mass
-        value="0.0364534139182269" />
+        value="0.15" />
       <inertia
-        ixx="3.292863530567E-05"
-        ixy="-2.87104862456198E-05"
-        ixz="-2.60003851941444E-06"
-        iyy="3.64743784614869E-05"
-        iyz="-2.39444733312611E-06"
-        izz="6.27932172557243E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -738,6 +770,14 @@
         <mesh
           filename="package://quadruped_robot/meshes/rlw_link.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
   </link>
   <joint
@@ -751,14 +791,14 @@
     <child
       link="rlw_link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="15"
-      velocity="0.1" />
-    <dynamics
-      friction="0.1" />
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
   </joint>
   <link
     name="lidar_link">
@@ -767,14 +807,14 @@
         xyz="-0.000358929753362797 6.73648551979822E-06 0.00597084128520243"
         rpy="0 0 0" />
       <mass
-        value="0.0486570347493236" />
+        value="0.15" />
       <inertia
-        ixx="8.03207199661195E-05"
-        ixy="9.62728020214782E-10"
-        ixz="-2.81787585091656E-06"
-        iyy="4.73642808306099E-05"
-        iyz="-1.31691164511042E-08"
-        izz="6.64275155095978E-05" />
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
     </inertial>
     <visual>
       <origin
@@ -813,19 +853,12 @@
     <axis
       xyz="0 0 0" />
   </joint>
-
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <parameters>$(find quadruped_robot)/config/control.yaml</parameters>
-    </plugin>
-  </gazebo>
-
-
   <ros2_control name="GazeboSystem" type="system">
     <hardware>
       <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-    </hardware> # Position Controller <joint
-      name="frs_joint">
+    </hardware>
+
+    <joint name="frs_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -834,7 +867,7 @@
       <state_interface name="velocity" />
     </joint>
 
-  <joint name="fre_joint">
+    <joint name="fre_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -843,7 +876,7 @@
       <state_interface name="velocity" />
     </joint>
 
- <joint name="frw_joint">
+    <joint name="frw_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -852,7 +885,7 @@
       <state_interface name="velocity" />
     </joint>
 
-  <joint name="rrs_joint">
+    <joint name="rrs_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -861,7 +894,7 @@
       <state_interface name="velocity" />
     </joint>
 
- <joint name="rre_joint">
+    <joint name="rre_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -870,7 +903,7 @@
       <state_interface name="velocity" />
     </joint>
 
-  <joint name="rrw_joint">
+    <joint name="rrw_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -879,7 +912,7 @@
       <state_interface name="velocity" />
     </joint>
 
- <joint name="fls_joint">
+    <joint name="fls_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -888,7 +921,7 @@
       <state_interface name="velocity" />
     </joint>
 
-  <joint name="fle_joint">
+    <joint name="fle_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -897,7 +930,7 @@
       <state_interface name="velocity" />
     </joint>
 
-  <joint name="flw_joint">
+    <joint name="flw_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -906,7 +939,7 @@
       <state_interface name="velocity" />
     </joint>
 
-  <joint name="rls_joint">
+    <joint name="rls_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -915,7 +948,7 @@
       <state_interface name="velocity" />
     </joint>
 
- <joint name="rle_joint">
+    <joint name="rle_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -924,7 +957,7 @@
       <state_interface name="velocity" />
     </joint>
 
-  <joint name="rlw_joint">
+    <joint name="rlw_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
@@ -934,6 +967,174 @@
     </joint>
 
   </ros2_control>
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find quadruped_robot)/config/control.yaml</parameters>
+    </plugin>
+  </gazebo>
 
+  <link
+    name="supplement"></link>
+
+  <joint
+    name="supplement_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0502486950872626 5.55111512312578E-17 0.0"
+      rpy="0 0 0" />
+    <parent
+      link="lidar_link" />
+    <child
+      link="supplement" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <gazebo
+    reference="supplement">
+    <sensor name="lidar" type="ray">
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <update_rate>5</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1.00000</resolution>
+            <min_angle>1.047</min_angle>
+            <max_angle>-1.047</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.120000</min>
+          <max>3.5</max>
+          <resolution>0.015000</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="scan" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>supplement</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo
+    reference="body_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>body_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>body_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+<gazebo>
+    <plugin filename="libodometry_plugin.so" name="odometry_plugin">
+      <frame>body_link</frame>
+      <world_frame>fixed_world</world_frame>
+    </plugin>
+  </gazebo>
+
+<xacro:macro name="yellow">
+    <visual>
+      <material>
+        <ambient>0.9 0.7 0.1 1</ambient>
+        <diffuse>0.9 0.7 0.1 1</diffuse>
+        <specular>0.1 0.1 0.1 1</specular>
+        <emissive>0 0 0 0</emissive>
+      </material>
+    </visual>
+  </xacro:macro>
+
+  <xacro:macro
+    name="black">
+    <visual>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>
+        <diffuse>0.1 0.1 0.1 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <emissive>0 0 0 0</emissive>
+      </material>
+    </visual>
+  </xacro:macro>
+
+<gazebo
+    reference="body_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="fls_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="fle_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="flw_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rls_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rle_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="rlw_link">
+    <xacro:black />
+  </gazebo>
+
+
+<gazebo reference="frs_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="fre_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="frw_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rrs_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rre_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="rrw_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="lidar_link">
+    <xacro:yellow />
+  </gazebo>
 
 </robot>
