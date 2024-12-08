@@ -75,40 +75,70 @@ for config in configurations:
     sympy.pprint(fk_result)
     print("-" * 50)
 
-def plot_robot(fk_steps, config, ax, title):
-    # Extract link lengths and joint angles
-    l1_val, l2_val, l3_val = config["l1"], config["l2"], config["l3"]
-    theta1_val, theta2_val, theta3_val = config["theta1"], config["theta2"], config["theta3"]
-   
-    # Calculate joint positions
-    points = [(0, 0, 0)]  # Base point
-    for step in fk_steps:
-        pos = step[:3, 3].evalf(subs={
-            theta1: theta1_val, theta2: theta2_val, theta3: theta3_val,
-            l1: l1_val, l2: l2_val, l3: l3_val
-        })
-        pos_numeric = [float(p) for p in pos]  # Convert to numerical values
-        points.append(pos_numeric)
-   
-    points = np.array(points)
-   
-    # Plot configuration
-    ax.plot(points[:, 0], points[:, 1], points[:, 2], '-o', label='Leg Structure')
-    ax.legend()
-    ax.set_title(title)
+import numpy as np
+import sympy
+from sympy import Matrix, cos, sin, pi
+import matplotlib.pyplot as plt
+
+# DH Parameters
+def transformation_matrix_from_dh_param(dh_row):
+    theta, alpha, a, d = dh_row
+    return Matrix([
+        [cos(theta), -sin(theta)*cos(alpha),  sin(theta)*sin(alpha), a*cos(theta)],
+        [sin(theta),  cos(theta)*cos(alpha), -cos(theta)*sin(alpha), a*sin(theta)],
+        [0,           sin(alpha),             cos(alpha),            d],
+        [0,           0,                      0,                     1]
+    ])
+
+def calculate_transformation_matrix(dh_table):
+    return [transformation_matrix_from_dh_param(dh_table[i:i+4]) for i in range(0, dh_table.rows * 4, 4)]
+
+def forward_kinematics(dh_table):
+    matrices = calculate_transformation_matrix(dh_table)
+    T = Matrix.eye(4)  # Identity matrix
+    joint_positions = [T[:3, 3]]  # Start at the base origin
+    for transform in matrices:
+        T = T * transform
+        joint_positions.append(T[:3, 3])  # Extract position
+    return joint_positions
+
+# Left Leg DH Table
+left_leg_dh_table = Matrix([
+    [0,        -pi/2, 0,     0],
+    [0,         0,    0,  0.0255],
+    [-pi/3+pi/4, 0, 0.10921, 0],
+    [pi/6-pi/2,  0, 0.13528, 0]
+])
+
+# Right Leg DH Table
+right_leg_dh_table = Matrix([
+    [0,         pi/2, 0,     0],
+    [0,         0,    0,  0.0255],
+    [pi/3-pi/4,  0, 0.10921, 0],
+    [-pi/6+pi/2, 0, 0.13528, 0]
+])
+
+# Visualize Forward Kinematics
+def plot_kinematics(joint_positions, title, ax):
+    x, y, z = zip(*[(float(pos[0]), float(pos[1]), float(pos[2])) for pos in joint_positions])
+    ax.plot(x, y, z, marker='o', label=title)
     ax.set_xlabel("X (m)")
     ax.set_ylabel("Y (m)")
     ax.set_zlabel("Z (m)")
+    ax.legend()
+    ax.set_title(title)
 
-# Create a figure with subplots for each configuration
-fig = plt.figure(figsize=(16, 12))
+fig = plt.figure(figsize=(12, 6))
 
-for i, config in enumerate(configurations):
-    ax = fig.add_subplot(2, 2, i+1, projection='3d')
-    fk_steps = fk_left_steps if config["leg"] == "Left" else fk_right_steps
-    plot_robot(fk_steps, config, ax, title=f"{config['leg']} Leg\nθ1={config['theta1']} θ2={config['theta2']} θ3={config['theta3']}")
+# Left Leg
+ax1 = fig.add_subplot(121, projection='3d')
+left_leg_positions = forward_kinematics(left_leg_dh_table)
+plot_kinematics(left_leg_positions, "Left Leg Forward Kinematics", ax1)
+
+# Right Leg
+ax2 = fig.add_subplot(122, projection='3d')
+right_leg_positions = forward_kinematics(right_leg_dh_table)
+plot_kinematics(right_leg_positions, "Right Leg Forward Kinematics", ax2)
 
 plt.tight_layout()
 plt.show()
-
-
