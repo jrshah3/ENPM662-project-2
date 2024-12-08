@@ -50,9 +50,9 @@ fk_right, fk_right_steps = forward_kinematics(calculate_transformation_matrix(ri
 # Define joint configurations and validate FK
 configurations = [
     {"leg": "Left", "theta1": 0, "theta2": -pi/4, "theta3": pi/2, "l1": 0.0255, "l2": 0.10921, "l3": 0.13528},
-    {"leg": "Left", "theta1": 0, "theta2": pi/4, "theta3": -pi/2, "l1": 0.0255, "l2": 0.10921, "l3": 0.13528},
+    {"leg": "Left", "theta1": 0, "theta2": -pi/6, "theta3": pi/3, "l1": 0.0255, "l2": 0.10921, "l3": 0.13528},
     {"leg": "Right", "theta1": 0, "theta2": pi/4, "theta3": -pi/2, "l1": 0.0255, "l2": 0.10921, "l3": 0.13528},
-    {"leg": "Right", "theta1": 0, "theta2": -pi/4, "theta3": pi/2, "l1": 0.0255, "l2": 0.10921, "l3": 0.13528},
+    {"leg": "Right", "theta1": 0, "theta2": pi/6, "theta3": -pi/3, "l1": 0.0255, "l2": 0.10921, "l3": 0.13528},
 ]
 
 for config in configurations:
