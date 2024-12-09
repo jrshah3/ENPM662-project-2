@@ -11,7 +11,7 @@ Before proceeding, make sure you have the following installed:
 - **git** version control system
 - **Gazebo** (for robot simulation)
 - **rviz** (for visualization of robot data)
-- **pybullet** (pip install pybullet for pyvullet visualisation)
+- **pybullet** (pip install pybullet for pybullet visualisation)
 
 ## Installation Instructions
 
