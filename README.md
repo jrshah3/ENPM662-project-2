@@ -75,7 +75,7 @@ To visualize the robot's data in RViz, run the following command in a new termin
 ros2 launch quadruped_robot display.launch.py
 ```
 ### 10.Visualize robot in Pybullet
-To visualize the robot in Pybullet, run the following file in python
+To visualize the robot in Pybullet, run the following file in python installing Pybullet library with pip install Pybullet
 ```bash
 Pybullet.ipynb
 ```
